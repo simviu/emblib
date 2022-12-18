@@ -28,5 +28,7 @@ namespace emb{
     class Motor{
 
     };
+    //---- Serial
+    
 }
 
