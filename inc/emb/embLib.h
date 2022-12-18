@@ -8,10 +8,27 @@
  */
  
 #pragma once
-#include "emb/eutils.h"
+
+#include <stdio.h>
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <cstdio>
+#include <memory>
+#include <cmath>
+
+#include <vector>
+#include <map>
+#include <set>
+#include <list>
+#include <queue>
+#include <functional>
+#include <thread>
+#include <mutex>
+#include <chrono>
+#include <condition_variable>
 
 namespace emb{
-    using namespace eu;
     
     //-----
     class PWM{
@@ -29,6 +46,12 @@ namespace emb{
 
     };
     //---- Serial
-    
+    class Serial{
+    public:
+        // default 8N1
+        Sp<Serial> create(const string& sPort, int baud);
+        virtual bool read(string& s){ return false; };
+        virtual bool write(const string& s){ return false; };
+    };
 }
 
