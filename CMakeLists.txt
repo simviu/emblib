@@ -1,14 +1,49 @@
 project(emblib)
 cmake_minimum_required(VERSION 3.4)
 
-SET(CMAKE_CXX_STANDARD 14)
+SET(CMAKE_CXX_STANDARD 17)
 
 set(BUILD_TESTS FALSE)
 add_subdirectory(dep/CppLinuxSerial)
 
 
 include_directories( 
-    inc 
+    ${JsonCpp_INCLUDE_DIR}
+    /usr/include/jsoncpp
+    inc
+    )
+
+#--- Hack for Mac brew
+message(STATUS "CMAKE_PREFIX_PATH = ${CMAKE_PREFIX_PATH}")
+link_directories(
+    /opt/dep/local/lib
+    /usr/local/lib
+    ${CMAKE_PREFIX_PATH}/lib)
+
+    
+#---- utLib 
+FILE(GLOB  SRC_UTLIB src/ut/*.cpp)
+add_library(utLib ${SRC_UTLIB})
+target_link_libraries(utLib   
+    ${JsonCpp_LIBRARIES} 
+    jsoncpp
+    pthread
+    )
+    
+    
+#---- vsnLib 
+FILE(GLOB  SRC_VSNLIB src/*.cpp)
+add_library(vsnLib ${SRC_VSNLIB})
+target_link_libraries(vsnLib   
+    ${OpenCV_LIBRARIES} 
+    ${Eigen3_LIBRARY}    
+    ${JsonCpp_LIBRARIES} 
+    ${PCL_LIBRARIES}
+    utLib
+    )
+
+
+include_directories( 
     dep/CppLinuxSerial/include
     )
 

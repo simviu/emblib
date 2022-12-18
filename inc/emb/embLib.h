@@ -9,27 +9,10 @@
  
 #pragma once
 
-#include <stdio.h>
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include <cstdio>
-#include <memory>
-#include <cmath>
-
-#include <vector>
-#include <map>
-#include <set>
-#include <list>
-#include <queue>
-#include <functional>
-#include <thread>
-#include <mutex>
-#include <chrono>
-#include <condition_variable>
+#include "ut/cutil.h"
 
 namespace emb{
-    
+    using namespace ut;
     //-----
     class PWM{
     public:

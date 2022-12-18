@@ -3,7 +3,6 @@
 
 using namespace emb;
 namespace{
-    using CLSPort=mn::CppLinuxSerial::SerialPort;
     class SerialImp : public Serial{
     public:
 
@@ -11,14 +10,15 @@ namespace{
         virtual bool read(string& s) override;
         virtual bool write(const string& s) override;
     protected:
-        Sp<CLSerial::SerialPort> p_port_ = nullptr;
+        Sp<mn::CppLinuxSerial::SerialPort> p_port_ = nullptr;
     };
 }
 
 //----
 SerialImp::SerialImp(const string& sPort, int baud)
 {
-    p_port_ = mkSp<CLSPort>("/dev/ttyUSB0", 
+    using namespace mn::CppLinuxSerial;
+    p_port_ = mkSp<SerialPort>("/dev/ttyUSB0", 
         BaudRate::B_57600, 
         NumDataBits::EIGHT, 
         Parity::NONE, NumStopBits::ONE);
