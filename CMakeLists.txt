@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.4)
 
 SET(CMAKE_CXX_STANDARD 17)
 
-set(BUILD_TESTS FALSE)
+add_definitions(BUILD_TESTS FALSE)
 add_subdirectory(dep/CppLinuxSerial)
 
 
@@ -31,17 +31,6 @@ target_link_libraries(utLib
     )
     
     
-#---- vsnLib 
-FILE(GLOB  SRC_VSNLIB src/*.cpp)
-add_library(vsnLib ${SRC_VSNLIB})
-target_link_libraries(vsnLib   
-    ${OpenCV_LIBRARIES} 
-    ${Eigen3_LIBRARY}    
-    ${JsonCpp_LIBRARIES} 
-    ${PCL_LIBRARIES}
-    utLib
-    )
-
 
 include_directories( 
     dep/CppLinuxSerial/include
