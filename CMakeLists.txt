@@ -6,10 +6,12 @@ SET(CMAKE_CXX_STANDARD 14)
 set(BUILD_TESTS FALSE)
 add_subdirectory(dep/CppLinuxSerial)
 
+
 include_directories( 
     inc 
     dep/CppLinuxSerial/include
     )
+
 
 set(ENV{embLib_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
   
