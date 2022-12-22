@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.4)
 
 SET(CMAKE_CXX_STANDARD 17)
 
-add_definitions(BUILD_TESTS FALSE)
-add_subdirectory(dep/CppLinuxSerial)
+#set(BUILD_TESTS FALSE)
+#add_subdirectory(dep/CppLinuxSerial)
 
 
 include_directories( 
