@@ -17,8 +17,8 @@ namespace{
     public:
         SerialImp(){};
         virtual bool open(const string& sPort, int baud)override;
-        virtual bool read(string& s) override;
-        virtual bool write(const string& s) override;
+        virtual bool read(char* buf, int n) override;
+        virtual bool write(char* buf, int n) override;
 
     protected:
         int fd_ = -1;
@@ -117,17 +117,17 @@ Sp<Serial> Serial::create()
 }
 //------
 
-bool SerialImp::read(string& s)
+bool SerialImp::read(char* buf, int n)
 {
     if(fd_ < 0) return false;
-     return false; 
+    int r = ::read(fd_, buf, n);
+    return (n==r); 
 }
 //------
-bool SerialImp::write(const string& s)
+bool SerialImp::write(char* buf, int n)
 {
     if(fd_ < 0) return false;
-    size_t n = s.length();
-    size_t r = ::write(fd_, s.c_str(), n);
+    size_t r = ::write(fd_, buf, n);
     return (n==r); 
 }
 
