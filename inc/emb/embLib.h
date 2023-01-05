@@ -32,8 +32,8 @@ namespace emb{
     class Serial{
     public:
         // default 8N1
-        Sp<Serial> create();
-        virtual bool open(const string& sPort, int baud);
+        static Sp<Serial> create();
+        virtual bool open(const string& sPort, int baud){ return false; };
         virtual bool read(char* buf, int n){ return false; };
         virtual bool write(char* buf, int n){ return false; };
     };
