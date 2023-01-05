@@ -26,7 +26,7 @@ FILE(GLOB  SRC_UTLIB src/ut/*.cpp)
 add_library(utLib ${SRC_UTLIB})
 target_link_libraries(utLib   
     ${JsonCpp_LIBRARIES} 
-    jsoncpp
+ #   jsoncpp
     pthread
     )
     
@@ -41,8 +41,8 @@ set(ENV{embLib_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
   
 
 FILE(GLOB  SRC_EMBLIB src/*.cpp)
-add_library(emblib ${SRC_EMBLIB})
-target_link_libraries(emblib  
-    CppLinuxSerial
+add_library(embLib ${SRC_EMBLIB})
+target_link_libraries(embLib  
+    utLib
     )
     
