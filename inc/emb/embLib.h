@@ -34,8 +34,15 @@ namespace emb{
         // default 8N1
         static Sp<Serial> create();
         virtual bool open(const string& sPort, int baud){ return false; };
-        virtual bool read(char* buf, int n){ return false; };
-        virtual bool write(char* buf, int n){ return false; };
+        virtual bool read(Buf& buf){ return false; };
+        virtual bool write(const Buf& buf){ return false; };
+        virtual bool readln(string& sln){ return false; };
+        bool write(const string& s)
+        {
+            uint8_t* p = (uint8_t*)s.c_str();
+            Buf b(p, s.length());
+            return write(b);
+        }        
     };
 }
 
