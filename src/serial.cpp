@@ -129,8 +129,12 @@ bool SerialImp::read(Buf& b)
 //------
 bool SerialImp::readln(string& sln)
 {
-    CFile f(fd_);
-    return f.readln(sln);
+    CStream f(fd_);
+    f.cfg_.timeout = cfg_.timeout;
+
+    bool ok = f.readln(sln);
+
+    return ok;
 }
 
 //------

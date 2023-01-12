@@ -31,6 +31,10 @@ namespace emb{
     //---- Serial
     class Serial{
     public:
+        struct Cfg{
+            float timeout = 1;
+        }; Cfg cfg_;
+        
         // default 8N1
         static Sp<Serial> create();
         virtual bool open(const string& sPort, int baud){ return false; };
