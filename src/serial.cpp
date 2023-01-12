@@ -79,7 +79,7 @@ namespace{
 bool SerialImp::open(const string& sPort, int baud)
 {
     //---- 1) Open Port
-    fd_ = ::open(sPort.c_str(), O_RDWR);
+    fd_ = ::open(sPort.c_str(), O_RDWR | O_NONBLOCK);
     if (fd_ < 0) 
     {
         log_e("  Fail to open serial port: '"+sPort+"'"+
