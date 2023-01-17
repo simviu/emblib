@@ -41,6 +41,8 @@ namespace emb{
         virtual bool read(Buf& buf){ return false; };
         virtual bool write(const Buf& buf){ return false; };
         virtual bool readln(string& sln){ return false; };
+        virtual bool readFrm(const string& sHeader, 
+                     Buf& buf){ return false; };
         bool write(const string& s)
         {
             uint8_t* p = (uint8_t*)s.c_str();

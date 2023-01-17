@@ -20,6 +20,8 @@ namespace{
         virtual bool read(Buf& b) override;
         virtual bool readln(string& sln)override;
         virtual bool write(const Buf& b) override;
+        virtual bool readFrm(const string& sHeader, 
+                     Buf& buf)override;
 
     protected:
         int fd_ = -1;
@@ -135,6 +137,14 @@ bool SerialImp::readln(string& sln)
     bool ok = f.readln(sln);
 
     return ok;
+}
+
+//----        
+bool SerialImp::readFrm(const string& sHeader, 
+                        Buf& buf)
+{ 
+    CStream cs(fd_);
+    return cs.readFrm(sHeader, buf);
 }
 
 //------
