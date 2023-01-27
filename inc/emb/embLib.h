@@ -11,8 +11,27 @@
 
 #include "ut/cutil.h"
 
+//----- cross platform macro
+#ifdef __APPLE__
+  #include <TargetConditionals.h>
+  #if TARGET_OS_MAC
+    #define SYS_MAC
+  #endif /* TARGET_OS_MAC */
+
+#elif defined __linux__
+    #define SYS_LINUX
+#elif defined _WIN32 || defined _WIN64
+    #define SYS_WIN
+#else
+#error "unknown platform"
+#endif
+
+//-----
 namespace emb{
     using namespace ut;
+    //---- platform
+
+
     //-----
     class GPIO{
     public:
