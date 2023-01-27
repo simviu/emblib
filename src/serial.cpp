@@ -1,3 +1,12 @@
+/*
+   Author: Sherman Chen
+   Create Time: 2022-01-27
+   Email: schen@simviu.com
+   Copyright(c): Simviu Inc.
+   Website: https://www.simviu.com
+ */
+
+
 #include "emb/embLib.h"
 
 #include <fcntl.h> // Contains file controls like O_RDWR

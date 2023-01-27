@@ -6,8 +6,17 @@
    Website: https://www.simviu.com
  */
 
+
 #include "emb/embLib.h"
 
 using namespace emb;
 
+bool PWM::init()
+{
+    return true;
+}
+//----
+void PWM::set_duty(float duty)
+{
 
+}

@@ -16,27 +16,33 @@ namespace emb{
     //-----
     class GPIO{
     public:
+        struct Cfg{
+            int pin = 0;
+        }; Cfg cfg_;
+        bool init();
     };
     //-----
     class PWM{
     public:
         struct Cfg{
+            int pin=0;
             float freq = 50; // 50Hz
         };
-        // occupy 0-1.0
-        void set_occupy(float ocp);
+        bool init();
+        // duty cycle 0-1.0
+        void set_duty(float duty);
     };
     //----
     // Servo always center 1.5ms (1500uS)
     // Most min/max typical 1ms - 2ms, some 0.5ms-2.5ms
     // Frequency, most 50Hz (20ms), 
     // Many good at 40-200Hz(5ms)
-    class Servo : public PWM{
+    class ServoPWM : public PWM{
     public:
         // degree -90 -- +90, most case
         void set_degree(float dgr); 
         // set micro, 1000 ot 2000, center at 1500
-        void set_uS(int uS);
+        void set_us(int us);
     };
     //---- Motor
     class Motor{
