@@ -25,6 +25,12 @@
 #else
 #error "unknown platform"
 #endif
+//-----
+
+#ifdef __arm__
+    #define RASPBERRY_PI  // Possible right
+#endif
+
 
 //-----
 namespace emb{
