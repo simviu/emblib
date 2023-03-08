@@ -49,13 +49,15 @@ namespace emb{
     //-----
     class PWM{
     public:
+        PWM(){}
+        PWM(int pin){ cfg_.pin = pin; init(); };
         struct Cfg{
             int pin=0;
             float freq = 50; // 50Hz
-        };
+        }; Cfg cfg_;
         bool init();
         // duty cycle 0-1.0
-        void set_duty(float duty);
+        bool set_duty(float duty);
     };
     //----
     // Servo always center 1.5ms (1500uS)
@@ -64,10 +66,15 @@ namespace emb{
     // Many good at 40-200Hz(5ms)
     class ServoPWM : public PWM{
     public:
-        // degree -90 -- +90, most case
-        void set_degree(float dgr); 
+        using PWM::PWM;
+        struct Cfg{
+            float dgr_range = 90; 
+        };
+
+        bool set_degree(float dgr)
+        { }
         // set micro, 1000 ot 2000, center at 1500
-        void set_us(int us);
+        bool set_us(int us);
     };
     //---- Motor
     class Motor{
