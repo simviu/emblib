@@ -11,7 +11,7 @@
 using namespace emb;
 
 //=================== Raspberry Pi ===============
-#if RASPBERRY_PI
+#ifdef RASPBERRY_PI
 #include <pigpio.h>
 
 namespace{
