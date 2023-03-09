@@ -72,7 +72,7 @@ namespace emb{
         };
 
         bool set_degree(float dgr)
-        { }
+        { return false; }
         // set micro, 1000 ot 2000, center at 1500
         bool set_us(int us);
     };

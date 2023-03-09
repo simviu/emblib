@@ -11,7 +11,7 @@
 using namespace emb;
 
 //=================== Raspberry Pi ===============
-// #if RASPBERRY_PI
+#if RASPBERRY_PI
 #include <pigpio.h>
 
 namespace{
@@ -48,5 +48,5 @@ bool PWM::set_duty(float duty)
         log_e("PWM::set_duty() unkown err");
     return false;
 }
-// #endif // RASPBERRY_PI
+#endif // RASPBERRY_PI
 //================================================
