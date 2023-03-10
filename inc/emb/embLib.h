@@ -125,6 +125,8 @@ namespace emb{
         EmbCmd(){ init_cmds(); }
     protected:
         void init_cmds();
+        void init_cmds_PWM();
+        map<int, Sp<PWM>> pwms_;
     };
    
 }
