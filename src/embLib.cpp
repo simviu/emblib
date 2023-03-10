@@ -10,4 +10,20 @@
 
 using namespace emb;
 
+namespace{
+    
+}
 
+//----
+void EmbCmd::init_cmds()
+{
+    //--- PWM
+    {
+        auto p = mkSp<Cmd>("(PWM commands)");
+        p->add("init", "pin=<PIN>", 
+        [&](CStrs& args)->bool{
+            return true;
+        });
+        add("pwm", p);
+    }
+}

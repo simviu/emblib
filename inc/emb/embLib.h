@@ -76,12 +76,7 @@ namespace emb{
         // set micro, 1000 ot 2000, center at 1500
         bool set_us(int us);
     };
-    //---- Motor
-    class Motor{
-    public:
-        // throttle 0-1.0
-        void set_throttle(float spd, bool fwd=true);
-    };
+    
     //---- Serial
     class Serial{
     public:
@@ -104,5 +99,33 @@ namespace emb{
             return write(b);
         }        
     };
+    //---- SPI
+    class SPI{
+    public:
+
+    };
+    //---- I2C
+    class I2C{
+    public:
+
+    };
+
+
+
+
+    //---- Motor
+    class Motor{
+    public:
+        // throttle 0-1.0
+        void set_throttle(float spd, bool fwd=true);
+    };
+    //-----
+    class EmbCmd : public Cmd{
+    public:
+        EmbCmd(){ init_cmds(); }
+    protected:
+        void init_cmds();
+    };
+   
 }
 
