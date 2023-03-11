@@ -120,9 +120,9 @@ namespace emb{
         void set_throttle(float spd, bool fwd=true);
     };
     //-----
-    class EmbCmd : public Cmd{
+    class IO_Cmd : public Cmd{
     public:
-        EmbCmd(){ init_cmds(); }
+        IO_Cmd(){ init_cmds(); }
     protected:
         void init_cmds();
         void init_cmds_PWM();

@@ -15,12 +15,12 @@ namespace{
 }
 
 //----
-void EmbCmd::init_cmds()
+void IO_Cmd::init_cmds()
 {
     init_cmds_PWM();
 }
 //----
-void EmbCmd::init_cmds_PWM()
+void IO_Cmd::init_cmds_PWM()
 {
 
     auto p = mkSp<Cmd>("(PWM commands)");
