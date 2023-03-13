@@ -110,8 +110,10 @@ namespace emb{
     protected:
         void init_cmds();
         void init_cmds_PWM();
+        void init_cmds_Servo();
 
         map<int, Sp<PWM>> pwms_;
+        map<int, Sp<ServoPWM>> servos_;
     };
 
 }
