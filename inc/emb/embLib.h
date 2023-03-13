@@ -75,13 +75,26 @@ namespace emb{
         // set micro, 1000 ot 2000, center at 1500
         bool set_us(int us);
     };
+    //---- SPI
+    class SPI{
+    public:
+        struct Cfg{
+
+        }; Cfg cfg_;
+        bool init(int channel, int spd);
+        bool xfer(Buf& buf);
+        bool write(Buf& buf);
+        bool read(Buf& buf);
+    protected:
+        int h_ = -1; // handle
+    };
     //---- Motor
     class Motor{
     public:
         // throttle 0-1.0
         void set_throttle(float spd, bool fwd=true);
     };
-    //---- Serial
+    //---- Serial (UART)
     class Serial{
     public:
         struct Cfg{
