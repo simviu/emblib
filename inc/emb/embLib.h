@@ -69,14 +69,18 @@ namespace emb{
         using PWM::PWM;
         struct Cfg{
             float dgr_range = 90; 
-        };
+        }; Cfg cfg_;
 
-        bool set_degree(float dgr)
-        { return false; }
+        bool set_degree(float dgr);
         // set micro, 1000 ot 2000, center at 1500
         bool set_us(int us);
     };
-    
+    //---- Motor
+    class Motor{
+    public:
+        // throttle 0-1.0
+        void set_throttle(float spd, bool fwd=true);
+    };
     //---- Serial
     class Serial{
     public:
@@ -99,26 +103,6 @@ namespace emb{
             return write(b);
         }        
     };
-    //---- SPI
-    class SPI{
-    public:
-
-    };
-    //---- I2C
-    class I2C{
-    public:
-
-    };
-
-
-
-
-    //---- Motor
-    class Motor{
-    public:
-        // throttle 0-1.0
-        void set_throttle(float spd, bool fwd=true);
-    };
     //-----
     class IO_Cmd : public Cmd{
     public:
@@ -126,8 +110,9 @@ namespace emb{
     protected:
         void init_cmds();
         void init_cmds_PWM();
+
         map<int, Sp<PWM>> pwms_;
     };
-   
+
 }
 
