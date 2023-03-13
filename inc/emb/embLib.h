@@ -79,9 +79,9 @@ namespace emb{
     class SPI{
     public:
         struct Cfg{
-
+            int flags=0; 
         }; Cfg cfg_;
-        bool init(int channel, int spd);
+        bool init(int ch, int spd);
         bool xfer(Buf& buf);
         bool write(Buf& buf);
         bool read(Buf& buf);
@@ -124,9 +124,11 @@ namespace emb{
         void init_cmds();
         void init_cmds_PWM();
         void init_cmds_Servo();
+        void init_cmds_SPI();
 
         map<int, Sp<PWM>> pwms_;
         map<int, Sp<ServoPWM>> servos_;
+        map<int, Sp<SPI>> spis_;
     };
 
 }

@@ -84,5 +84,80 @@ void IO_Cmd::init_cmds_Servo()
         log_e("fail to get or parse 'degree' or 'us' para");
         return false;
     });
-    add("pwm", p);
+    add("servo", p);
+}
+
+
+
+//----
+void IO_Cmd::init_cmds_SPI()
+{
+
+    auto p = mkSp<Cmd>("(SPI commands)");
+    p->add("init", "ch=<CH> spd=<SPD> [flags=<FLAGS>]", 
+    [&](CStrs& args)->bool{
+        KeyVals kvs(args);
+        int ch = 0, spd=0, flags=0;
+        if(!kvs.get("ch",  ch )) return false;
+        if(!kvs.get("spd", spd)) return false;
+        //---
+        auto p = mkSp<SPI>();
+        if(s2d(kvs["flags"], flags))
+            p->cfg_.flags = flags;
+
+        spis_[ch] = p;
+        return p->init(ch, spd);
+    });
+    //-----
+    p->add("write", "ch=[CH] d=<BYTE>", 
+    [&](CStrs& args)->bool{
+        KeyVals kvs(args);
+        int ch=0;
+        if(!kvs.get("ch",  ch )) return false;
+        if(spis_.find(ch)==spis_.end())
+        {
+            stringstream s;  s << "SPI not init on ch:" << ch;
+            log_e(s.str()); return false;
+        }
+        auto p = spis_[ch];
+        uint32_t d = 0;
+        uint8_t d1 = d; 
+        Buf buf;
+        if(s2hex(kvs["d"], d)) 
+        {
+            buf.p = &d1;
+            buf.n = 1;
+            return p->write(buf); 
+        }
+        log_e("Fail to get data");
+        return false;
+    });
+    //-----
+    p->add("read", "ch=[CH] n=<N>", 
+    [&](CStrs& args)->bool{
+        KeyVals kvs(args);
+        int ch=0; int n=0;
+        bool ok = true;
+        ok &= kvs.get("ch",  ch) &&
+              kvs.get("n",   n );
+        if(spis_.find(ch)==spis_.end())
+        {
+            stringstream s;  s << "SPI not init on ch:" << ch;
+            log_e(s.str()); return false;
+        }
+        auto p = spis_[ch];
+        Buf buf(n);
+        stringstream s;
+        if(!p->read(buf))
+        {
+            s << "fail to read spi ch:" << ch;
+            return false; 
+        } 
+        //---
+        log_i(s.str());
+        return true;
+    });
+
+    //-----
+    add("spi", p);
 }

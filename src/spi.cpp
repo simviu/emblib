@@ -11,6 +11,10 @@
 
 using namespace emb;
 
+
+//=================== Raspberry Pi ===============
+#ifdef RASPBERRY_PI
+#include <pigpio.h>
 namespace{
 
     //---- err string of pigpio spi functions
@@ -32,7 +36,7 @@ namespace{
 bool SPI::init(int ch, int spd)
 {
     //----
-    h_ = spiOpen(0, spd, 0);
+    h_ = spiOpen(0, spd, cfg_.flags);
     stringstream s;
     if(h_>=0)
     {
@@ -73,3 +77,6 @@ bool SPI::write(Buf& buf)
     log_e("spiWrite : " + err_str(h_));
     return false;
 }
+
+
+#endif // #ifdef RASPBERRY_PI
