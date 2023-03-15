@@ -41,10 +41,17 @@ namespace emb{
     //-----
     class GPIO{
     public:
+        GPIO(){}
+        GPIO(int pin, int mode)
+        {   cfg_.pin = pin; 
+            cfg_.mode = mode; }
         struct Cfg{
             int pin = 0;
+            int mode = 0; // r:0, w:1
         }; Cfg cfg_;
         bool init();
+        bool read(bool& d);
+        bool write(bool d);
     };
     //-----
     class PWM{
