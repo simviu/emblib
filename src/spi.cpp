@@ -52,7 +52,7 @@ bool SPI::init(int ch, int spd)
 //----
 bool SPI::xfer(Buf& buf)
 {
-    int r = spiXfer(h_, buf.p, buf.p, buf.n);
+    int r = spiXfer(h_, (char*)buf.p, (char*)buf.p, buf.n);
     if(r==buf.n)return true;
     
     log_e("spiXfer : " + err_str(h_));
@@ -62,7 +62,7 @@ bool SPI::xfer(Buf& buf)
 //----
 bool SPI::read(Buf& buf)
 {
-    int r = spiRead(h_, buf.p, buf.p, buf.n);
+    int r = spiRead(h_, (char*)buf.p, buf.n);
     if(r==buf.n)return true;
     
     log_e("spiRead : " + err_str(h_));
@@ -71,7 +71,7 @@ bool SPI::read(Buf& buf)
 //----
 bool SPI::write(Buf& buf)
 {
-    int r = spiWrite(h_, buf.p, buf.p, buf.n);
+    int r = spiWrite(h_, (char*)buf.p, buf.n);
     if(r==buf.n)return true;
     
     log_e("spiWrite : " + err_str(h_));

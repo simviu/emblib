@@ -29,9 +29,9 @@ bool GPIO::init()
     //---
     int r=0;
     if(m==0) 
-        r = gpioSetMode(PI_INPUT);
+        r = gpioSetMode(p, PI_INPUT);
     else if(m==1) 
-        r = gpioSetMode(PI_OUTPUT);
+        r = gpioSetMode(p, PI_OUTPUT);
     else {
         log_e("not support mode, expect mode 0/1 for r/w");
         return false;
@@ -74,10 +74,11 @@ bool GPIO::read(bool& d)
 bool GPIO::write(bool d)
 {
     int r = gpioWrite(cfg_.pin, d);
-    if(r==0) return false;
+    if(r==0) return true;
     stringstream s;
     s << "gpio wr fail, err code" << r;
     log_e(s.str());
+    return false;
 }
 
 #endif //#ifdef RASPBERRY_PI
