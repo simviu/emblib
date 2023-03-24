@@ -98,8 +98,20 @@ namespace emb{
     //---- Motor
     class Motor{
     public:
-        // throttle 0-1.0
-        void set_throttle(float spd, bool fwd=true);
+        Motor(){}
+
+        struct Cfg{
+            int mode=0; // 0: DC motor, fwd/bwd
+            int pin1=-1;
+            int pin2=-1;
+            bool b_slow_decay=false;
+        }; Cfg cfg_; 
+        // spd 0-1.0
+        bool set(float spd, bool fwd);
+        bool init();
+    protected:
+        PWM pwm1_;
+        PWM pwm2_;
     };
     //---- Serial (UART)
     class Serial{
