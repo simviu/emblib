@@ -24,6 +24,7 @@ bool Hw::chkInit()
 { return hw_chk_init(); }
 //=================== Raspberry Pi ===============
 #ifdef RASPBERRY_PI
+#include <pigpio.h>
 
 //---
 bool hw_chk_init()
@@ -39,7 +40,7 @@ bool hw_chk_init()
     }
     //----
     stringstream s;
-    s >> "pigpio init failed, code:" <<r;
+    s << "pigpio init failed, code:" <<r;
     log_e(s.str());
     
     return false;    
