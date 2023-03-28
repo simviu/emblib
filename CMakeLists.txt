@@ -5,7 +5,15 @@ SET(CMAKE_CXX_STANDARD 17)
 
 #set(BUILD_TESTS FALSE)
 #add_subdirectory(dep/CppLinuxSerial)
+#---- check raspberry pi
+if($ENV{OSTYPE}=="linux-gnueabihf")
+    SET(RASPBERRY_PI TRUE)
+endif()
 
+if(RASPBERRY_PI)
+    SET(USER_LDFLAGS "${USER_LDFLAGS} -lpigpio")
+endif()
+#---- 
 
 include_directories( 
     ${JsonCpp_INCLUDE_DIR}
@@ -45,5 +53,6 @@ FILE(GLOB  SRC_EMBLIB src/*.cpp)
 add_library(embLib ${SRC_EMBLIB})
 target_link_libraries(embLib  
     utLib
+    ${USER_LDFLAGS}
     )
     

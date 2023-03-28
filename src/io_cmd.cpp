@@ -187,7 +187,27 @@ void IO_Cmd::init_cmds_Motor()
         motors_[ch] = p;
         return p->init();
     });    
+    //---
+    p->add("set", "ch=[CH] spd=[0..1] [-back]", 
+    [&](CStrs& args)->bool{
+        KeyVals kvs(args);
+        int ch;
+        if(!kvs.get("ch", ch)) return false;
+        //----
+        stringstream s;  
+        if(motors_.find(ch)==motors_.end())
+        {
+            s << "No motor on ch:" << ch;
+            log_e(s.str()); return false;
+        }
+        //----
+        auto pm = motors_[ch];
+        double spd=0; bool fwd = true;
+        if(!kvs.get("spd", spd))return false;
+        if(kvs.has("-back")) fwd = false;
+        pm->set(spd, fwd);
 
+    });
     //-----
     add("motor", p);
 }
