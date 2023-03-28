@@ -22,6 +22,10 @@ namespace{
 //----
 bool PWM::init()
 {
+    if(!Hw::inst().chkInit())
+    return false;
+
+    //----
     stringstream s;
     s << "PWM::init(), pin=" << cfg_.pin;
     s << ", duty_range:" << lc_.duty_range << "...";

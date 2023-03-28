@@ -35,8 +35,12 @@
 //-----
 namespace emb{
     using namespace ut;
-    //---- platform
-
+    //---- Hw platform
+    class Hw{
+    public:
+        static Hw& inst(); // singleton
+        bool chkInit();
+    };
 
     //-----
     class GPIO{

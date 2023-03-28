@@ -35,6 +35,9 @@ namespace{
 //----
 bool SPI::init(int ch, int spd)
 {
+    if(!Hw::inst().chkInit())
+        return false;
+
     //----
     h_ = spiOpen(0, spd, cfg_.flags);
     stringstream s;

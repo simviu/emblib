@@ -14,6 +14,7 @@ using namespace emb;
 //----
 bool Motor::init()
 {
+    
     pwm1_.cfg_.pin = cfg_.pin1;
     pwm2_.cfg_.pin = cfg_.pin2;
     bool ok = true;

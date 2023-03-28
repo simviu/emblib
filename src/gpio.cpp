@@ -14,9 +14,17 @@ using namespace emb;
 #ifdef RASPBERRY_PI
 #include <pigpio.h>
 
+namespace {
+
+}
+//----
+
 //----
 bool GPIO::init()
 {
+    if(!Hw::inst().chkInit())
+        return false;
+        
     // mode : r:0, w:1
     int p = cfg_.pin;
     int m = cfg_.mode;
