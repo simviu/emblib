@@ -48,5 +48,11 @@ bool PWM::set_duty(float duty)
         log_e("PWM::set_duty() unkown err");
     return false;
 }
+//-------------- Dummy ------------
+#else  // RASPBERRY_PI
+
+bool PWM::init(){ return false; }
+bool PWM::set_duty(float duty){ return false; }
+
 #endif // RASPBERRY_PI
 //================================================

@@ -18,6 +18,9 @@ namespace{
 void IO_Cmd::init_cmds()
 {
     init_cmds_PWM();
+    init_cmds_Servo();
+    init_cmds_SPI();
+    init_cmds_Motor();
 }
 //----
 void IO_Cmd::init_cmds_PWM()
@@ -161,3 +164,31 @@ void IO_Cmd::init_cmds_SPI()
     //-----
     add("spi", p);
 }
+
+//------
+void IO_Cmd::init_cmds_Motor()
+{
+    auto p = mkSp<Cmd>("(Motor commands)");
+    p->add("init", "ch=[CH] pins=<PIN1,PIN2> ", 
+    [&](CStrs& args)->bool{
+        KeyVals kvs(args);
+        int ch;
+        if(!kvs.get("ch", ch)) return false;
+        //---
+        string spins; 
+        if(!kvs.get("pins", spins))return false;
+        vector<int> pins;
+        if(!s2data(spins, pins)) return false;
+        if(pins.size()<2)return false;
+        //---
+        auto p = mkSp<Motor>();
+        p->cfg_.pin1 = pins[0];
+        p->cfg_.pin2 = pins[1];
+        motors_[ch] = p;
+        return p->init();
+    });    
+
+    //-----
+    add("motor", p);
+}
+

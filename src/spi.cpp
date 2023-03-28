@@ -77,6 +77,11 @@ bool SPI::write(Buf& buf)
     log_e("spiWrite : " + err_str(h_));
     return false;
 }
-
+//------------ Dummy ------------
+#else // 
+bool SPI::init(int ch, int spd){ return false; }
+bool SPI::write(Buf& buf){ return false; }
+bool SPI::read(Buf& buf){ return false; }
+bool SPI::xfer(Buf& buf){ return false; }
 
 #endif // #ifdef RASPBERRY_PI

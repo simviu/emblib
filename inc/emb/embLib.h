@@ -144,10 +144,12 @@ namespace emb{
         void init_cmds_PWM();
         void init_cmds_Servo();
         void init_cmds_SPI();
+        void init_cmds_Motor();
 
         map<int, Sp<PWM>> pwms_;
         map<int, Sp<ServoPWM>> servos_;
         map<int, Sp<SPI>> spis_;
+        map<int, Sp<Motor>> motors_;
     };
 
 }
