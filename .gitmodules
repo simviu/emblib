@@ -1,3 +1,0 @@
-[submodule "dep/CppLinuxSerial"]
-	path = dep/CppLinuxSerial
-	url = git@github.com:gbmhunter/CppLinuxSerial.git
