@@ -205,8 +205,8 @@ void IO_Cmd::init_cmds_Motor()
         double spd=0; bool fwd = true;
         if(!kvs.get("spd", spd))return false;
         if(kvs.has("-back")) fwd = false;
-        pm->set(spd, fwd);
-
+        return pm->set(spd, fwd);
+	
     });
     //-----
     add("motor", p);
