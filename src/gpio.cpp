@@ -88,5 +88,12 @@ bool GPIO::write(bool d)
     log_e(s.str());
     return false;
 }
+//------------ dummy ---------
+#else // RASPBERRY_PI
+
+bool GPIO::init(){ return false;  }
+bool GPIO::read(bool& d){ return false;  }
+bool GPIO::write(bool d){ return false;  }
+
 
 #endif //#ifdef RASPBERRY_PI

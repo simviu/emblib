@@ -1,0 +1,7 @@
+#--- Raspberry Pi, motor typeT (TB6612)
+#   ( io 5,6 for mode, io 12 for PWM)
+motor init ch=1 type=T pins=5,6,12 
+
+#--- run
+motor set ch=1 spd=1.0
+motor set ch=1 -back spd=0.5

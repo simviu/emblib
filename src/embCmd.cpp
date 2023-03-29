@@ -198,8 +198,14 @@ void EmbCmd::init_cmds_SPI()
 //------
 void EmbCmd::init_cmds_Motor()
 {
-    auto p = mkSp<Cmd>("(Motor commands)");
-    p->add("init", "ch=[CH] pins=<PIN1,PIN2> ", 
+    auto pcmd = mkSp<Cmd>("(Motor commands)");
+    stringstream sH; 
+    sH << "ch=[CH] type=[D|T] pins=[<PIN1,PIN2>|PIN_PWM] \n";
+    sH << "    typeD : DRV8833 (2 pins switch PWM)\n"; 
+    sH << "    typeT : TB6612  (2 pins mode, 1 PWM pin)\n"; 
+
+    //---- init
+    pcmd->add("init", sH.str(), 
     [&](CStrs& args)->bool{
         KeyVals kvs(args);
         int ch;
@@ -209,16 +215,35 @@ void EmbCmd::init_cmds_Motor()
         if(!kvs.get("pins", spins))return false;
         vector<int> pins;
         if(!s2data(spins, pins)) return false;
-        if(pins.size()<2)return false;
+
         //---
-        auto p = mkSp<MotorD>();
-        p->cfg_.pin1 = pins[0];
-        p->cfg_.pin2 = pins[1];
-        motors_[ch] = p;
-        return p->init();
+        string sTp; if(!kvs.get("type", sTp)) return false;
+
+        Sp<Motor> pm = nullptr;
+        pm->cfg_.pins = pins;
+        //--- Type D
+        if(sTp=="D")
+        {
+            auto p = mkSp<MotorD>();
+            pm = p;
+        }
+        //--- Type T
+        else if(sTp=="T")
+        {
+            auto p = mkSp<MotorT>();
+            pm = p;
+        }
+        else{
+            log_e("  Unknown type:'"+sTp+"'");
+            return false;
+        }
+        //---
+        motors_[ch] = pm;
+        return pm->init();
     });    
-    //---
-    p->add("set", "ch=[CH] spd=[0..1] [-back]", 
+
+    //---- set
+    pcmd->add("set", "ch=[CH] spd=[0..1] [-back]", 
     [&](CStrs& args)->bool{
         KeyVals kvs(args);
         int ch;
@@ -239,6 +264,6 @@ void EmbCmd::init_cmds_Motor()
 	
     });
     //-----
-    add("motor", p);
+    add("motor", pcmd);
 }
 

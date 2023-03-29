@@ -14,13 +14,17 @@ using namespace emb;
 //----
 bool MotorD::init()
 {
-    
-    pwm1_.cfg_.pin = cfg_.pin1;
-    pwm2_.cfg_.pin = cfg_.pin2;
+    auto& pins = Motor::cfg_.pins;
+    if(pins.size()<2)
+    { log_e("MotorD expect 2 pins in cfg"); return false; }
+
+    //---
+    pwm1_.cfg_.pin = pins[0];
+    pwm2_.cfg_.pin = pins[1];
     bool ok = true;
     ok &= pwm1_.init();
     ok &= pwm2_.init();
-    return true;
+    return ok;
 }
 //----
 bool MotorD::set(float spd, bool fwd)
@@ -36,5 +40,5 @@ bool MotorD::set(float spd, bool fwd)
         ok &= pwm1_.set_duty(sd);
         ok &= pwm2_.set_duty(spd);
     }
-    return true;
+    return ok;
 }

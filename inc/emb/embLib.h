@@ -103,18 +103,20 @@ namespace emb{
     class Motor{
     public:
         Motor(){}
+        struct Cfg{
+            vector<int> pins;
+        }; Cfg cfg_;
         // spd 0-1.0
         virtual bool set(float spd, bool fwd)=0;
         virtual bool init()=0;
     };
-    //---- MotorD ( DRV8833)
+    //---- MotorD 
+    // ( DRV8833, 2 pins switch PWM)
     class MotorD : public Motor{
     public:
         MotorD(){}
 
         struct Cfg{
-            int pin1=-1;
-            int pin2=-1;
             bool b_slow_decay=false;
         }; Cfg cfg_; 
         // spd 0-1.0
@@ -124,6 +126,22 @@ namespace emb{
         PWM pwm1_;
         PWM pwm2_;
     };
+    //---- MotorT
+    // ( TB6612, 2 pins for mode, 1 pin PWM)
+    class MotorT : public Motor{
+    public:
+        MotorT(){}
+
+        struct Cfg{
+        }; Cfg cfg_; 
+        // spd 0-1.0
+        virtual bool set(float spd, bool fwd)override;
+        virtual bool init()override;
+    protected:
+        PWM pwm_;
+        GPIO io1_,io2_;
+    };
+
     //---- Serial (UART)
     class Serial{
     public:
