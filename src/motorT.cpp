@@ -28,11 +28,13 @@ bool MotorT::init()
     return ok;
 }
 //----
-bool MotorT::set(float spd, bool fwd)
+bool MotorT::set(float spd)
 {
     bool ok = true;
+    bool fwd = (spd>0);
+
     ok &= io1_.write(fwd);
     ok &= io2_.write(!fwd);
-    ok &= pwm_.set_duty(spd);
+    ok &= pwm_.set_duty(fabs(spd));
     return ok;
 }

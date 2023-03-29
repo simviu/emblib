@@ -243,7 +243,7 @@ void EmbCmd::init_cmds_Motor()
     });    
 
     //---- set
-    pcmd->add("set", "ch=[CH] spd=[0..1] [-back]", 
+    pcmd->add("set", "ch=[CH] spd=[-1.0 ... 1.0]", 
     [&](CStrs& args)->bool{
         KeyVals kvs(args);
         int ch;
@@ -259,8 +259,7 @@ void EmbCmd::init_cmds_Motor()
         auto pm = motors_[ch];
         double spd=0; bool fwd = true;
         if(!kvs.get("spd", spd))return false;
-        if(kvs.has("-back")) fwd = false;
-        return pm->set(spd, fwd);
+        return pm->set(spd);
 	
     });
     //-----

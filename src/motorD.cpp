@@ -27,18 +27,20 @@ bool MotorD::init()
     return ok;
 }
 //----
-bool MotorD::set(float spd, bool fwd)
+bool MotorD::set(float spd)
 {
     bool ok = true;
     float sd = cfg_.b_slow_decay ? 1.0 : 0.0;
+    bool fwd = (spd >=0);
+    float d = fabs(spd);
     if(fwd)
     {
-        ok &= pwm1_.set_duty(spd);
+        ok &= pwm1_.set_duty(d);
         ok &= pwm2_.set_duty(sd);
     }
     else{
         ok &= pwm1_.set_duty(sd);
-        ok &= pwm2_.set_duty(spd);
+        ok &= pwm2_.set_duty(d);
     }
     return ok;
 }

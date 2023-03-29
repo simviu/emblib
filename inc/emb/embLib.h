@@ -106,8 +106,8 @@ namespace emb{
         struct Cfg{
             vector<int> pins;
         }; Cfg cfg_;
-        // spd 0-1.0
-        virtual bool set(float spd, bool fwd)=0;
+        // spd [-1.0 ... -1.0]
+        virtual bool set(float spd)=0;
         virtual bool init()=0;
     };
     //---- MotorD 
@@ -119,8 +119,8 @@ namespace emb{
         struct Cfg{
             bool b_slow_decay=false;
         }; Cfg cfg_; 
-        // spd 0-1.0
-        virtual bool set(float spd, bool fwd)override;
+        // spd -10 to 1.0
+        virtual bool set(float spd)override;
         virtual bool init()override;
     protected:
         PWM pwm1_;
@@ -134,8 +134,8 @@ namespace emb{
 
         struct Cfg{
         }; Cfg cfg_; 
-        // spd 0-1.0
-        virtual bool set(float spd, bool fwd)override;
+        // spd -1.0 to 1.0
+        virtual bool set(float spd)override;
         virtual bool init()override;
     protected:
         PWM pwm_;
