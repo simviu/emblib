@@ -20,6 +20,8 @@ bool MotorT::init()
     //----    
     io1_.cfg_.pin = pins[0];
     io2_.cfg_.pin = pins[1];
+    io1_.cfg_.mode = 1; // mode 1 for w
+    io2_.cfg_.mode = 1;
     pwm_.cfg_.pin = pins[2];
     bool ok = true;
     ok &= pwm_.init();
