@@ -8,6 +8,7 @@ SET(CMAKE_CXX_STANDARD 17)
 #---- check raspberry pi
 if($ENV{OSTYPE}=="linux-gnueabihf")
     SET(RASPBERRY_PI TRUE)
+    message(STATUS "OSTYPE==linux-gnueabihf, set RASPBERRY_PI Pi")
 endif()
 
 if(RASPBERRY_PI)
@@ -40,12 +41,7 @@ target_link_libraries(utLib
     )
     
     
-
-include_directories( 
-    dep/CppLinuxSerial/include
-    )
-
-
+#-----
 set(ENV{embLib_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
   
 
