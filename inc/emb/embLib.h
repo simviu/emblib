@@ -103,16 +103,23 @@ namespace emb{
     class Motor{
     public:
         Motor(){}
+        // spd 0-1.0
+        virtual bool set(float spd, bool fwd)=0;
+        virtual bool init()=0;
+    };
+    //---- MotorD ( DRV8833)
+    class MotorD : public Motor{
+    public:
+        MotorD(){}
 
         struct Cfg{
-            int mode=0; // 0: DC motor, fwd/bwd
             int pin1=-1;
             int pin2=-1;
             bool b_slow_decay=false;
         }; Cfg cfg_; 
         // spd 0-1.0
-        bool set(float spd, bool fwd);
-        bool init();
+        virtual bool set(float spd, bool fwd)override;
+        virtual bool init()override;
     protected:
         PWM pwm1_;
         PWM pwm2_;

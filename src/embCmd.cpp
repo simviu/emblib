@@ -211,7 +211,7 @@ void EmbCmd::init_cmds_Motor()
         if(!s2data(spins, pins)) return false;
         if(pins.size()<2)return false;
         //---
-        auto p = mkSp<Motor>();
+        auto p = mkSp<MotorD>();
         p->cfg_.pin1 = pins[0];
         p->cfg_.pin2 = pins[1];
         motors_[ch] = p;

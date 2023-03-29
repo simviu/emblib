@@ -12,7 +12,7 @@
 using namespace emb;
 
 //----
-bool Motor::init()
+bool MotorD::init()
 {
     
     pwm1_.cfg_.pin = cfg_.pin1;
@@ -23,7 +23,7 @@ bool Motor::init()
     return true;
 }
 //----
-bool Motor::set(float spd, bool fwd)
+bool MotorD::set(float spd, bool fwd)
 {
     bool ok = true;
     float sd = cfg_.b_slow_decay ? 1.0 : 0.0;
