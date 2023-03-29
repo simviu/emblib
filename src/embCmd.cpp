@@ -14,8 +14,9 @@ namespace{
     
 }
 
+
 //----
-void IO_Cmd::init_cmds()
+void EmbCmd::init_cmds()
 {
     init_cmds_PWM();
     init_cmds_Servo();
@@ -23,7 +24,36 @@ void IO_Cmd::init_cmds()
     init_cmds_Motor();
 }
 //----
-void IO_Cmd::init_cmds_PWM()
+void EmbCmd::init_cmds_gpio()
+{
+
+    auto p = mkSp<Cmd>("(PWM commands)");
+    p->add("init", "pin=<PIN>", 
+    [&](CStrs& args)->bool{
+        KeyVals kvs(args);
+        int pin = 0; 
+        if(!kvs.get("pin", pin)) return false;
+        pwms_[pin] = mkSp<PWM>(pin);
+        return true;
+    });
+    //-----
+    p->add("set", "pin=<PIN> duty=<0-1.0> ", 
+    [&](CStrs& args)->bool{
+        KeyVals kvs(args);
+        int pin = 0; double duty=0;
+        if(!kvs.get("pin", pin)) return false;
+        if(!kvs.get("duty", duty)) return false;
+        if(pwms_.find(pin)==pwms_.end())
+        {
+            stringstream s;  s << "PWM not init on pin:" << pin;
+            log_e(s.str()); return false;
+        }
+        return pwms_[pin]->set_duty(duty);
+    });
+    add("io", p);    
+}
+//----
+void EmbCmd::init_cmds_PWM()
 {
 
     auto p = mkSp<Cmd>("(PWM commands)");
@@ -53,7 +83,7 @@ void IO_Cmd::init_cmds_PWM()
 }
 
 //----
-void IO_Cmd::init_cmds_Servo()
+void EmbCmd::init_cmds_Servo()
 {
 
     auto p = mkSp<Cmd>("(Servo commands)");
@@ -93,7 +123,7 @@ void IO_Cmd::init_cmds_Servo()
 
 
 //----
-void IO_Cmd::init_cmds_SPI()
+void EmbCmd::init_cmds_SPI()
 {
 
     auto p = mkSp<Cmd>("(SPI commands)");
@@ -166,7 +196,7 @@ void IO_Cmd::init_cmds_SPI()
 }
 
 //------
-void IO_Cmd::init_cmds_Motor()
+void EmbCmd::init_cmds_Motor()
 {
     auto p = mkSp<Cmd>("(Motor commands)");
     p->add("init", "ch=[CH] pins=<PIN1,PIN2> ", 

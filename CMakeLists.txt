@@ -56,3 +56,13 @@ target_link_libraries(embLib
     ${USER_LDFLAGS}
     )
     
+
+
+#--- embcmd
+FILE(GLOB  SRC_CMD app/*.cpp)
+add_executable(embcmd ${SRC_CMD})
+target_link_libraries(embcmd   
+	embLib
+	#-lpigpio
+	#	-lstdc++fs
+	)

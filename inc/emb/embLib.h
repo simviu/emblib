@@ -140,11 +140,12 @@ namespace emb{
         }        
     };
     //-----
-    class IO_Cmd : public Cmd{
+    class EmbCmd : public Cmd{
     public:
-        IO_Cmd(){ init_cmds(); }
+        EmbCmd(){ init_cmds(); }
     protected:
         void init_cmds();
+        void init_cmds_gpio();
         void init_cmds_PWM();
         void init_cmds_Servo();
         void init_cmds_SPI();
