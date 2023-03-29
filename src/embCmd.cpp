@@ -220,7 +220,6 @@ void EmbCmd::init_cmds_Motor()
         string sTp; if(!kvs.get("type", sTp)) return false;
 
         Sp<Motor> pm = nullptr;
-        pm->cfg_.pins = pins;
         //--- Type D
         if(sTp=="D")
         {
@@ -238,6 +237,8 @@ void EmbCmd::init_cmds_Motor()
             return false;
         }
         //---
+        assert(pm!=nullptr);
+        pm->cfg_.pins = pins;
         motors_[ch] = pm;
         return pm->init();
     });    
