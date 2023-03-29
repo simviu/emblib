@@ -6,13 +6,10 @@ SET(CMAKE_CXX_STANDARD 17)
 #set(BUILD_TESTS FALSE)
 #add_subdirectory(dep/CppLinuxSerial)
 #---- check raspberry pi
-if($ENV{OSTYPE}=="linux-gnueabihf")
-    SET(RASPBERRY_PI TRUE)
-    message(STATUS "OSTYPE==linux-gnueabihf, set RASPBERRY_PI Pi")
-endif()
+message(STATUS "processor:${CMAKE_HOST_SYSTEM_PROCESSOR}")
 
-if(RASPBERRY_PI)
-    SET(USER_LDFLAGS "${USER_LDFLAGS} -lpigpio")
+if(EXISTS /usr/include/pigpio.h)
+	SET(LD_pigpio "-lpigpio")
 endif()
 #---- 
 
@@ -49,7 +46,7 @@ FILE(GLOB  SRC_EMBLIB src/*.cpp)
 add_library(embLib ${SRC_EMBLIB})
 target_link_libraries(embLib  
     utLib
-    ${USER_LDFLAGS}
+    ${LD_pigpio}
     )
     
 
