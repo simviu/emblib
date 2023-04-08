@@ -71,6 +71,17 @@ namespace emb{
         bool set_duty(float duty);
     };
     //----
+    class UWB{
+    public:
+        struct Cfg{
+        }; Cfg cfg_;
+        virtual bool init()=0;
+        virtual bool rangeTo(int id)=0;
+        
+        
+    };
+
+    //----
     // Servo always center 1.5ms (1500uS)
     // Most min/max typical 1ms - 2ms, some 0.5ms-2.5ms
     // Frequency, most 50Hz (20ms), 
