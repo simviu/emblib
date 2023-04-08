@@ -141,6 +141,22 @@ namespace emb{
         PWM pwm_;
         GPIO io1_,io2_;
     };
+    //----
+    class DualMotor{
+    public:
+        // 0: type D(DRV8833), 2pins
+        // 1: type T(TB6612), 3pins
+        DualMotor(int type) { init_motors(type); }
+        struct Cfg{
+            Motor::Cfg motor_cfgs[2];
+        };
+        bool init();
+        bool set(float spdL, float spdR);
+        Sp<Motor> motors_[2]{nullptr, nullptr};
+    private:
+        void init_motors(int type);
+        bool chkInit();
+    };
 
     //---- Serial (UART)
     class Serial{
