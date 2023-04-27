@@ -7,6 +7,7 @@ SET(CMAKE_CXX_STANDARD 17)
 #add_subdirectory(dep/CppLinuxSerial)
 #---- check raspberry pi
 message(STATUS "processor:${CMAKE_HOST_SYSTEM_PROCESSOR}")
+message(STATUS "utLb_DIR=$ENV{utLib_DIR}")
 
 if(EXISTS /usr/include/pigpio.h)
 	SET(LD_pigpio "-lpigpio")
@@ -14,6 +15,7 @@ endif()
 #---- 
 
 include_directories( 
+    $ENV{utLib_DIR}/inc
     ${JsonCpp_INCLUDE_DIR}
     /usr/include/jsoncpp
     inc
@@ -27,15 +29,6 @@ link_directories(
     ${CMAKE_PREFIX_PATH}/lib)
 
     
-#---- utLib 
-FILE(GLOB  SRC_UTLIB src/ut/*.cpp)
-add_library(utLib ${SRC_UTLIB})
-target_link_libraries(utLib   
-    ${JsonCpp_LIBRARIES} 
- #   jsoncpp
-    pthread
- #   stdc++fs
-    )
     
     
 #-----
