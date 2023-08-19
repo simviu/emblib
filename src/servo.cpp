@@ -18,7 +18,7 @@ bool ServoPWM::set_degree(float dgr)
 { 
     float r = cfg_.dgr_range;
     float d = Rng(-r, r).cut(dgr);
-    float us = 1000 + 500*d/r;
+    float us = 1500 + 500*d/r;
     return true;   
 }
 
