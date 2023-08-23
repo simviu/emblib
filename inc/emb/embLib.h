@@ -9,7 +9,10 @@
  
 #pragma once
 
-#include "ut/cutil.h"
+//--------------
+
+
+//--------------
 
 //----- cross platform macro
 #ifdef __APPLE__
@@ -22,11 +25,20 @@
     #define SYS_LINUX
 #elif defined _WIN32 || defined _WIN64
     #define SYS_WIN
+#elif defined ESP_PLATFORM
+    #define SYS_MCU
 #else
 #error "unknown platform"
 #endif
 //-----
 
+#ifdef SYS_MCU
+    #include "emb/cutil_mcu.h"
+#else // SYS_MCU
+    #include "ut/cutil.h"
+#endif // SYS_MCU
+
+//---- TODO: STM32
 #ifdef __arm__
     #define RASPBERRY_PI  // Possible right
 #endif
@@ -192,6 +204,7 @@ namespace emb{
         }        
     };
     //-----
+#ifndef SYS_MCU
     class EmbCmd : public Cmd{
     public:
         EmbCmd(){ init_cmds(); }
@@ -208,6 +221,7 @@ namespace emb{
         map<int, Sp<SPI>> spis_;
         map<int, Sp<Motor>> motors_;
     };
+#endif // SYS_MCU
 
 }
 
