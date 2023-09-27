@@ -73,9 +73,9 @@ namespace emb{
     class PWM{
     public:
         PWM(){}
-        PWM(int pin){ cfg_.pin = pin; init(); };
+        PWM(int pin){ cfg_.pin = pin; };
         struct Cfg{
-            int pin=0;
+            int pin=-1;
             float freq = 50; // 50Hz
         }; Cfg cfg_;
         bool init();

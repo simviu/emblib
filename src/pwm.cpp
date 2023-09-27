@@ -22,6 +22,12 @@ namespace{
 //----
 bool PWM::init()
 {
+    if(cfg_.pin < 0)
+    {
+        log_e("PWM::init() failed, pin not set");
+        return false;
+    }
+    //----
     if(!Hw::inst().chkInit())
     return false;
 
