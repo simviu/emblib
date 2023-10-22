@@ -78,9 +78,9 @@ namespace emb{
             int pin=-1;
             float freq = 50; // 50Hz
         }; Cfg cfg_;
-        bool init();
+        virtual bool init();
         // duty cycle 0-1.0
-        bool set_duty(float duty);
+        virtual bool set_duty(float duty);
     };
     //----
     class UWB{
@@ -95,19 +95,22 @@ namespace emb{
 
     //----
     // Servo always center 1.5ms (1500uS)
-    // Most min/max typical 1ms - 2ms, some 0.5ms-2.5ms
+    // Most min/max typical 1ms - 2ms, 90 dgr
+    // Some 0.5ms-2.5ms
+    //    0: 500, 90: 1500, 180: 2500
     // Frequency, most 50Hz (20ms), 
     // Many good at 40-200Hz(5ms)
     class ServoPWM : public PWM{
     public:
         using PWM::PWM;
         struct Cfg{
-            float dgr_range = 90; 
+            float us_min = 500; // min microsec
+            float us_per_dgr = 1000/90.0;
         }; Cfg cfg_;
 
-        bool set_degree(float dgr);
-        // set micro, 1000 ot 2000, center at 1500
-        bool set_us(int us);
+        virtual bool set_degree(float dgr);
+        // set pulse uS, 
+        virtual bool set_us(int us);
     };
     //---- SPI
     class SPI{

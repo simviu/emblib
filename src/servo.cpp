@@ -16,10 +16,9 @@ using namespace emb;
 //  center at 1500us, range is  +-500us
 bool ServoPWM::set_degree(float dgr)
 { 
-    float r = cfg_.dgr_range;
-    float d = Rng(-r, r).cut(dgr);
-    float us = 1500 + 500*d/r;
-    return true;   
+   
+    float us = cfg_.us_min + dgr * cfg_.us_per_dgr;
+    return set_us(us);   
 }
 
 // T = 1.0 / f
