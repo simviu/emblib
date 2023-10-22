@@ -50,7 +50,7 @@ namespace{
         ESP_ERROR_CHECK(mcpwm_new_generator(oper, &generator_config, &generator));
 
         // set the initial compare value, so that the servo will spin to the center position
-        ESP_ERROR_CHECK(mcpwm_comparator_set_compare_value(comparator, example_angle_to_compare(0)));
+        ESP_ERROR_CHECK(mcpwm_comparator_set_compare_value(comparator, esp32_ang2us(0)));
         
         
         log_i("Set generator action on timer and compare event");
@@ -87,10 +87,10 @@ bool ServoEsp::init()
 }
 //----
         
-bool ServoEsp::set_us(int us)
+bool ServoEsp::set_degree(float ang) 
 {
     auto& comparator = mc_.comparator;
-    ESP_ERROR_CHECK(mcpwm_comparator_set_compare_value(comparator, us));
+    ESP_ERROR_CHECK(mcpwm_comparator_set_compare_value(comparator, esp32_ang2us(ang)));
     return true;
 }
     

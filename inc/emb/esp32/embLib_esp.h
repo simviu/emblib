@@ -17,7 +17,7 @@ using namespace emb;
 #define SERVO_TIMEBASE_PERIOD        20000    // 20000 ticks, 20ms
 
 
-inline uint32_t example_angle_to_compare(int angle)
+inline uint32_t esp32_ang2us(int angle)
 {
     return (angle - SERVO_MIN_DEGREE) * (SERVO_MAX_PULSEWIDTH_US - SERVO_MIN_PULSEWIDTH_US) / (SERVO_MAX_DEGREE - SERVO_MIN_DEGREE) + SERVO_MIN_PULSEWIDTH_US;
 }
@@ -53,8 +53,8 @@ public:
     using ServoPWM::ServoPWM;
 
     virtual bool init() override;
-//  virtual bool set_degree(float ang) override; // -90 to 90
-    virtual bool set_us(int us)override;
+    virtual bool set_degree(float ang) override; // -90 to 90
+  //virtual bool set_us(int us)override;
 
 protected:
     MCPWM_dt mc_;
