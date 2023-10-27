@@ -10,11 +10,4 @@
 #include "emb/embLib.h"
 using namespace emb;
 
-//=================== Raspberry Pi ===============
-#ifdef RASPBERRY_PI // by "pi/pwm_pi.cpp"
-#else // dummy
 
-bool PWM::init(){ return false; }
-bool PWM::set_duty(float duty){ return false; }
-
-#endif // RASPBERRY_PI

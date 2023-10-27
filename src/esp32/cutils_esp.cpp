@@ -14,6 +14,9 @@ namespace ut
         string s1 = s + "\n";
         esp_log_write(ESP_LOG_INFO, "info", s1.c_str());
     }
+    extern void log_d(const string& s)
+    { log_i("[dbg]:"+s); }
+
     //----
     extern void sys_delay(float t)
     {
