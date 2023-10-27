@@ -11,6 +11,12 @@
 
 using namespace emb;
 
+bool ServoPWM::init()
+{
+    bool ok = PWM::init();
+    set_degree(cfg_.dgr_init);
+    return ok;
+}
 
 // For most servo, 1000us to 2000us, 
 //  center at 1500us, range is  +-500us

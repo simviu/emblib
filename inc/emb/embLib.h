@@ -110,7 +110,7 @@ namespace emb{
             int dgr2us(float dgr)const 
             { return us_min + us_per_dgr * dgr; }
         }; Cfg cfg_;
-
+        virtual bool init()override;
         virtual bool set_degree(float dgr);
         // set pulse uS, 
         virtual bool set_us(int us);
