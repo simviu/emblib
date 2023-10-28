@@ -56,8 +56,8 @@ bool PWM::set_duty(float duty)
     ESP_ERROR_CHECK(ledc_update_duty(LEDC_MODE, LEDC_CHANNEL));
 
     stringstream s;
-    s << " PWM::set_duty(), duty=" << duty << ", dn=" << dn;    
-    log_i(s.str());
+    //s << " PWM::set_duty(), duty=" << duty << ", dn=" << dn;    
+    //log_i(s.str());
     return true;
 }
 

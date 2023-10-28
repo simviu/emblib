@@ -27,6 +27,7 @@
     #define SYS_WIN
 #elif defined ESP_PLATFORM
     #define SYS_MCU
+    #include "emb/esp32/cutils_esp.h"
 #else
 #error "unknown platform"
 #endif
