@@ -78,6 +78,8 @@ namespace emb{
         struct Cfg{
             int pin=-1;
             float freq = 50; // 50Hz
+            // Info for hardware implementation.
+            int ch_id = 0; // timer channel ID 
         }; Cfg cfg_;
         virtual bool init();
         // duty cycle 0-1.0

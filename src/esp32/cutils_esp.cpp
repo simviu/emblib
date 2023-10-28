@@ -15,7 +15,13 @@ namespace ut
         esp_log_write(ESP_LOG_INFO, "info", s1.c_str());
     }
     extern void log_d(const string& s)
-    { log_i("[dbg]:"+s); }
+    {   esp_log_write(ESP_LOG_DEBUG, "debug", (s+"\n").c_str()); }
+
+    extern void log_w(const string& s)
+    {   esp_log_write(ESP_LOG_WARN, "warn", (s+"\n").c_str()); }
+
+    extern void log_e(const string& s)
+    {   esp_log_write(ESP_LOG_ERROR, "error", (s+"\n").c_str()); }
 
     //----
     extern void sys_delay(float t)

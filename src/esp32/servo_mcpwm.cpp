@@ -1,3 +1,5 @@
+// TODO: Deprecated, replaced by LEDC method , in pwm_esp.cpp
+
 #include "emb/esp32/embLib_esp.h"
 
 using namespace ut;
