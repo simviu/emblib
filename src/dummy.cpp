@@ -26,3 +26,6 @@ bool OLED::init(){ return true; }
 bool OLED::write(int vpos, const string& s, int font_sz)
     { return false; };
 void OLED::clear(){ };
+//-----
+bool ADC::init(){ return false; };
+int  ADC::read(){ return -1; };

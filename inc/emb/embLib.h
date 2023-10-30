@@ -224,6 +224,15 @@ namespace emb{
         bool write(int vpos, const string& s, int font_sz=1);
         void clear();
     };
+    //-----
+    class ADC{
+    public:
+        struct Cfg{
+            int chIdx=0;
+        }; Cfg cfg_;
+        bool init();
+        int read();
+    };
     //--------------------
 #ifndef SYS_MCU
     class EmbCmd : public Cmd{
