@@ -15,7 +15,7 @@ bool PWM::init()
 {
     return false;
 }
-//----
+//---- dummy
 bool PWM::set_duty(float duty)
 {
     return false;
