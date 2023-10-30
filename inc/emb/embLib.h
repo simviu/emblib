@@ -220,6 +220,9 @@ namespace emb{
             int pin_SDA = 5;
             int pin_SCL = 6;
         }; Cfg cfg_;
+        bool init();
+        bool write(int vpos, const string& s, int font_sz=1);
+        void clear();
     };
     //--------------------
 #ifndef SYS_MCU

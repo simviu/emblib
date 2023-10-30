@@ -1,6 +1,6 @@
 /*
    Author: Sherman Chen
-   Create Time: 2022-01-27
+   Create Time: 2023-10-27
    Email: schen@simviu.com
    Copyright(c): Simviu Inc.
    Website: https://www.simviu.com
@@ -10,13 +10,19 @@
 #include "emb/embLib.h"
 using namespace emb;
 
-//---- dummy
+//------- dummy implementation ----
+
 bool PWM::init()
 {
     return false;
 }
-//---- dummy
+//---- 
 bool PWM::set_duty(float duty)
 {
     return false;
 }
+//----------
+bool OLED::init(){ return true; }
+bool OLED::write(int vpos, const string& s, int font_sz)
+    { return false; };
+void OLED::clear(){ };
