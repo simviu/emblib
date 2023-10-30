@@ -11,6 +11,11 @@ namespace{
 //----
 bool OLED::init()
 {
+    // TODO: sys level singleton
+    i2c_master_init(&dev_, 
+        cfg_.pin_SDA, 
+        cfg_.pin_SCL, cfg_.pin_RST);
+    //--- 
 	ssd1306_init(&dev_, 128, 64);
 	ssd1306_clear_screen(&dev_, false);
 	ssd1306_contrast(&dev_, 0xff);

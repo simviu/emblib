@@ -219,6 +219,7 @@ namespace emb{
         struct Cfg{
             int pin_SDA = 5;
             int pin_SCL = 6;
+            int pin_RST = 7;
         }; Cfg cfg_;
         bool init();
         bool write(int vpos, const string& s, int font_sz=1);
