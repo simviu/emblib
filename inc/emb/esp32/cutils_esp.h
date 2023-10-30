@@ -17,6 +17,8 @@ namespace ut{
     extern void log_d(const string& s);
     extern void log_w(const string& s);
     extern void log_e(const string& s);
-    extern void sys_delay(float t);
+    namespace sys{
+        extern void sleep(double t);
 
+    }
 }

@@ -24,9 +24,11 @@ namespace ut
     {   esp_log_write(ESP_LOG_ERROR, "error", (s+"\n").c_str()); }
 
     //----
-    extern void sys_delay(float t)
-    {
-        uint32_t n = t*1000;
-        vTaskDelay(pdMS_TO_TICKS(n));
+    namespace sys{
+        extern void sleep(double t)
+        {
+            uint32_t n = t*1000;
+            vTaskDelay(pdMS_TO_TICKS(n));
+        }
     }
 }

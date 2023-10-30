@@ -10,4 +10,13 @@
 #include "emb/embLib.h"
 using namespace emb;
 
-
+//---- dummy
+bool PWM::init()
+{
+    return false;
+}
+//----
+bool PWM::set_duty(float duty)
+{
+    return false;
+}
