@@ -212,7 +212,16 @@ namespace emb{
             return write(b);
         }        
     };
-    //-----
+    //----
+    // e.g.: SSD1306 / SH1106
+    class OLED{
+    public:
+        struct Cfg{
+            int pin_SDA = 5;
+            int pin_SCL = 6;
+        }; Cfg cfg_;
+    };
+    //--------------------
 #ifndef SYS_MCU
     class EmbCmd : public Cmd{
     public:
