@@ -222,7 +222,8 @@ namespace emb{
             int pin_RST = 7;
         }; Cfg cfg_;
         bool init();
-        bool write(int vpos, const string& s, int font_sz=1);
+        bool write(int line, const string& s, int font_sz=1);
+        bool clear(int line);
         void clear();
     };
     //-----

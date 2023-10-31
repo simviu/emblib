@@ -22,14 +22,21 @@ bool OLED::init()
     return true;
 }
 //---
-bool OLED::write(int vpos, 
+bool OLED::write(int ln, 
     const string& s, int font_sz)
 {
+    /// for only 128x64, each page is a line, with 8bits x 128
     if(font_sz <3)
-        ssd1306_display_text(&dev_, vpos, (char*)s.c_str(), s.length(), false);
+        ssd1306_display_text(&dev_, ln, (char*)s.c_str(), s.length(), false);
     else
-    	ssd1306_display_text_x3(&dev_, vpos, (char*)s.c_str(), s.length(), false);
+    	ssd1306_display_text_x3(&dev_, ln, (char*)s.c_str(), s.length(), false);
 
+    return true;
+}
+//---
+bool OLED::clear(int ln)
+{
+    ssd1306_clear_line(&dev_, ln, false);
     return true;
 }
 //---
