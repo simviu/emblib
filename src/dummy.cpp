@@ -24,8 +24,9 @@ bool PWM::set_duty(float duty)
 //----------
 bool OLED::init(){ return true; }
 bool OLED::write(int vpos, const string& s, int font_sz)
-    { return false; };
-void OLED::clear(){ };
+    { return false; }
+void OLED::clear(){ }
+void OLED::clear(int ln){ }
 //-----
 bool ADC::init(){ return false; };
 int  ADC::read(){ return -1; };

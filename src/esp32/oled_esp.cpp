@@ -34,10 +34,9 @@ bool OLED::write(int ln,
     return true;
 }
 //---
-bool OLED::clear(int ln)
+void OLED::clear(int ln)
 {
     ssd1306_clear_line(&dev_, ln, false);
-    return true;
 }
 //---
 void OLED::clear()

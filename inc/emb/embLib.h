@@ -223,7 +223,7 @@ namespace emb{
         }; Cfg cfg_;
         bool init();
         bool write(int line, const string& s, int font_sz=1);
-        bool clear(int line);
+        void clear(int line);
         void clear();
     };
     //-----
