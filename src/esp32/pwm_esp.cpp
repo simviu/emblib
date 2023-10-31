@@ -23,13 +23,13 @@ namespace {
 //-----
 bool PWM::init()
 {
-    log_i("Set PWM pin...");
+    log_i("    Set PWM pin...");
     //----- allocate timer channel
     int tmr=0; 
     int ch = 0;
     auto& sys = Esp32Sys::inst();
     if(!sys.get_timer(tmr, ch)) {
-        log_e("  Failed");
+        log_e("    Failed");
         return false;
     }
     cfg_.ch_id = ch;
@@ -61,7 +61,7 @@ bool PWM::init()
 
     //------------
     stringstream s;
-    s << " done, pin:" << cfg_.pin;
+    s << "      done, pin:" << cfg_.pin;
     s << ", freq:"  << cfg_.freq << ", ch_id:" << cfg_.ch_id; 
     log_i(s.str());
 

@@ -229,7 +229,7 @@ namespace emb{
     class ADC{
     public:
         struct Cfg{
-            int chIdx=0;
+            int pin=0;
         }; Cfg cfg_;
         bool init();
         int read();

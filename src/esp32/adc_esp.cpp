@@ -15,9 +15,9 @@ using namespace emb;
 // ESP32 has more channels and 1 more unit.
 namespace {
     //----
-    bool get_ch(int chIdx, adc_channel_t& ch)
+    bool get_ch(int pin, adc_channel_t& ch)
     {
-        switch(chIdx)
+        switch(pin)
         {
             case 0 : ch= ADC_CHANNEL_0; break;
             case 1 : ch= ADC_CHANNEL_1; break;
@@ -28,57 +28,57 @@ namespace {
         }
         return true;
     }
-    //----
-    adc_oneshot_unit_handle_t adc_handles_[10];
-    int adc_unit_idx_ = 0;
+    //---- There are 2 A/D unit, use only one.
+    struct ADC_unitd // ADC unit data
+    {
+        bool had_init = false; 
+        adc_oneshot_unit_handle_t handle;
+        //----
+        bool chkInit(){
+            if(had_init) return true;
+            adc_oneshot_unit_init_cfg_t cfg = {
+                .unit_id = ADC_UNIT_1 ,
+            };
+            ESP_ERROR_CHECK(adc_oneshot_new_unit(&cfg, &handle));
+            had_init = true;
+            log_i("  ADC unit 1 init ok");
+            return true;
+        };
+    }; ADC_unitd adc_ud1;
 }
 
 //-----
 bool ADC::init()
 {
-    int chIdx = cfg_.chIdx; // ESP32C3 is 0-4
+    int pin = cfg_.pin; // ESP32C3 is 0-4
+    log_i("  ADC alloc on pin:"+to_string(pin));
+
     adc_channel_t ch;
-    if(!get_ch(chIdx, ch))
+    if(!get_ch(pin, ch))
     {
-        log_e("Error ADC channel:"+to_string(chIdx));
+        log_e("  Failed to allocate ADC pin:"+to_string(pin));
         return false;
     }
-    //---- always unit0, so far.
-    adc_oneshot_unit_handle_t handle;
-
-    if(adc_unit_idx_>1)
-    {
-        log_e("Only 2 ADC units available(ESP32C3)");
+    //---- always unit1, so far.
+    if(!adc_ud1.chkInit())
         return false;
-    }
 
-
-    adc_oneshot_unit_init_cfg_t init_config1 = {
-        .unit_id = (adc_unit_idx_==0)?ADC_UNIT_1 : ADC_UNIT_2,
-    };
-    adc_unit_idx_++;
-
-
-    //----
-    ESP_ERROR_CHECK(adc_oneshot_new_unit(&init_config1, &handle));
     //-------------ADC1 Config---------------//
     adc_oneshot_chan_cfg_t config = {
-        .atten = ADC_ATTEN_DB_11,
+        .atten = ADC_ATTEN_DB_6,
         .bitwidth = ADC_BITWIDTH_DEFAULT,
     };
-    ESP_ERROR_CHECK(adc_oneshot_config_channel(handle, ch, &config));
-    adc_handles_[chIdx] = handle;
+    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc_ud1.handle, ch, &config));
+    log_i("  ADC channel allocat ok on pin:"+to_string(pin));
     return true; 
 };
 //----
 int  ADC::read()
 { 
-    int chIdx = cfg_.chIdx; // ESP32C3 is 0-4
     adc_channel_t ch;
-    if(!get_ch(chIdx, ch))
+    if(!get_ch(cfg_.pin, ch))
         return -1;
     int d=-1;
-    auto& handle = adc_handles_[chIdx];
-    ESP_ERROR_CHECK(adc_oneshot_read(handle, ch, &d));
+    ESP_ERROR_CHECK(adc_oneshot_read(adc_ud1.handle, ch, &d));
     return d; 
 };
