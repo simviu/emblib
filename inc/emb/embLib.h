@@ -235,6 +235,16 @@ namespace emb{
         bool init();
         int read();
     };
+    //----
+    class Wifi{
+    public:
+        struct Cfg{
+            string ssid ="ssid";
+            string pswd = "1234";
+        }; Cfg cfg_;
+        static Wifi& inst(); // singleton
+        static bool connect();
+    };
     //--------------------
 #ifndef SYS_MCU
     class EmbCmd : public Cmd{

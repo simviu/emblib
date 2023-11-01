@@ -30,3 +30,6 @@ void OLED::clear(int ln){ }
 //-----
 bool ADC::init(){ return false; };
 int  ADC::read(){ return -1; };
+//----
+Wifi& Wifi::inst(){ static Wifi i_; return i_; }
+bool Wifi::connect(){  return true;  }
