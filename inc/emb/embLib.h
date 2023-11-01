@@ -243,7 +243,7 @@ namespace emb{
             string pswd = "1234";
         }; Cfg cfg_;
         static Wifi& inst(); // singleton
-        static bool connect();
+        virtual bool connect();
     };
     //--------------------
 #ifndef SYS_MCU

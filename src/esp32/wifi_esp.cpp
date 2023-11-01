@@ -13,3 +13,40 @@
 #include "lwip/sys.h"
 
 using namespace emb;
+//----
+class WifiEsp : public Wifi
+{
+public:
+    virtual bool connect()override;
+protected:
+    bool hasInit_ = false;
+    bool init();
+
+};
+//----
+bool WifiEsp::init()
+{
+    
+    return true;
+}
+//----
+bool WifiEsp::connect()
+{
+    bool ok = true;
+    if(!hasInit_)
+        ok = init();
+    if(!ok) return false;
+    return true;
+}
+
+//----
+Wifi& Wifi::inst()
+{
+    static Wifi i_; 
+    return i_; 
+}
+//----
+bool Wifi::connect()
+{  
+    return true;  
+}
