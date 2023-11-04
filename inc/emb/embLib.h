@@ -220,6 +220,8 @@ namespace emb{
             int pin_SDA = 5;
             int pin_SCL = 6;
             int pin_RST = 7;
+            void set_pins(int sda, int scl, int rst)
+            { pin_SDA = sda; pin_SCL = scl; pin_RST = rst; }
         }; Cfg cfg_;
         bool init();
         bool write(int line, const string& s, int font_sz=1);
