@@ -34,6 +34,40 @@ namespace ut
     
     using namespace std;
 
+    using CStr = const string;
+    using Strs = vector<string>;
+    using CStrs = const vector<string>;
+
+    /*
+    extern void log_i(const string& s);
+    extern void log_d(const string& s);
+    extern void log_w(const string& s);
+    extern void log_e(const string& s);
+    namespace sys{
+        extern void sleep(double t);
+    }
+    */
+
+    //-----------
+    // log
+    //-----------
+    namespace utlog{
+        extern bool openFile(CStr& sFile);
+        extern void dbg(CStr& s);
+        extern void inf(CStr& s);
+        extern void err(CStr& s);
+        extern void errf(CStr& s);
+        extern void str(CStr& s);
+        using FuncCbk=std::function<void(CStr& s)>;
+        extern void setCallbk(FuncCbk cbk);
+    }
+    // shortcuts
+    const auto log_s = utlog::str;
+    const auto log_i = utlog::inf;
+    const auto log_d = utlog::dbg;
+    const auto log_e = utlog::err;
+    const auto log_ef = utlog::errf;
+
     //------------
     // string utils
     //------------
