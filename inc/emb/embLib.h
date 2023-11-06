@@ -34,7 +34,7 @@
 //-----
 
 #ifdef SYS_MCU
-    #include "emb/cutil_mcu.h"
+    #include "ut/cutil.h"
 #else // SYS_MCU
     #include "ut/cutil.h"
 #endif // SYS_MCU
