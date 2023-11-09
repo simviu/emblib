@@ -256,7 +256,7 @@ namespace emb{
         double inp(double d)
         {
             int N = ds_.size();
-            if(N==0) return 0;
+            if(N==0) return d;
             double sum = 0;
             for(int i=0;i<N-1;i++)
             {
