@@ -247,6 +247,31 @@ namespace emb{
         static Wifi& inst(); // singleton
         virtual bool connect();
     };
+    //----
+    // Simple data filter by shift/average
+    class AvgFilter{
+    public:
+        AvgFilter(){}
+        AvgFilter(int N, double d=0.0):ds_(N, d){}
+        double inp(double d)
+        {
+            int N = ds_.size();
+            if(N==0) return 0;
+            double sum = 0;
+            for(int i=0;i<N-1;i++)
+            {
+                sum += ds_[i];
+                ds_[i] = ds_[i+1];
+            }
+            ds_[N-1] = d;
+            sum += d;
+            return sum / N;
+        }
+        void init(int N, double d=0.0)
+        { ds_ = vector<double>(N,d); }
+    protected:
+        vector<double> ds_;
+    };
     //--------------------
 #ifndef SYS_MCU
     class EmbCmd : public Cmd{
