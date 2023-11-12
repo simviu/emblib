@@ -292,15 +292,10 @@ namespace emb{
         bool pub(const string& sTopic, const string& sPayload);
         bool sub(const string& sTopic);
 
-        void setRecvCb(FunRecvCb f){ recvCb_ = f; }
-        bool isConnected()const
-        { return data_.isConnected; }
+        void setRecvCb(FunRecvCb f);
+        bool isConnected()const;
     protected:
-        FunRecvCb recvCb_ = nullptr;
-        struct Data{
-            bool isConnected = false;
-        }; Data data_;
-
+        
     };
 
     //--------------------
