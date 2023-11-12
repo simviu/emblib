@@ -286,7 +286,7 @@ namespace emb{
             string sClientId="dev001";
             int port = 1883;
         }; Cfg cfg_;
-
+        static MQTT& inst(); // singleton
         //-----
         bool connect();
         bool pub(const string& sTopic, const string& sPayload);

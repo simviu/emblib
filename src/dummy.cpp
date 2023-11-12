@@ -33,3 +33,17 @@ int  ADC::read(){ return -1; };
 //----
 Wifi& Wifi::inst(){ static Wifi i_; return i_; }
 bool Wifi::connect(){  return true;  }
+
+//-----
+bool MQTT::connect() 
+    { return false; }
+bool MQTT::pub(const string& sTopic, 
+               const string& sPayload)
+    { return false; }
+bool MQTT::sub(const string& sTopic)
+    { return false; }
+void MQTT::setRecvCb(FunRecvCb f){}
+bool MQTT::isConnected()const
+    { return false; }
+MQTT& MQTT::inst() // singleton
+    { static MQTT i_; return i_;  }; 
