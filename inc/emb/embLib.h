@@ -272,6 +272,36 @@ namespace emb{
     protected:
         vector<double> ds_;
     };
+    //------
+    class MQTT{
+    public:
+        using FunRecvCb=function
+            <bool(const string& sTopic,
+                  const string& sPayload)>;
+
+        struct Cfg{
+            string sUrl="mqtt://broker....";
+            string sUsr="username"; 
+            string sPswd="123456"; 
+            string sClientId="dev001";
+            int port = 1883;
+        }; Cfg cfg_;
+
+        //-----
+        bool connect();
+        bool isConnected()const
+        { return data_.isConnected; }
+        bool pub(const string& sTopic, const string& sPayload);
+        bool sub(const string& sTopic);
+        void setRecvCb(FunRecvCb f){ recvCb_ = f; }
+    protected:
+        FunRecvCb recvCb_ = nullptr;
+        struct Data{
+            bool isConnected = false;
+        }; Data data_;
+
+    };
+
     //--------------------
 #ifndef SYS_MCU
     class EmbCmd : public Cmd{
