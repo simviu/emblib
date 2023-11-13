@@ -245,7 +245,7 @@ namespace emb{
             string pswd = "1234";
         }; Cfg cfg_;
         static Wifi& inst(); // singleton
-        virtual bool connect();
+        virtual bool connect(){ return false; };
     };
     //----
     // Simple data filter by shift/average
