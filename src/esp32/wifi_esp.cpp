@@ -144,7 +144,7 @@ bool WifiEsp::connect()
                                                         &instance_got_ip));
     
     //----- 1)
-/*
+
 
     wifi_config_t wifi_config = {
         .sta = {
@@ -155,11 +155,10 @@ bool WifiEsp::connect()
             //.sae_h2e_identifier = EXAMPLE_H2E_IDENTIFIER,
         },
     };
-    */
 
     //----- 2)
     
-    wifi_config_t wifi_config;
+   // wifi_config_t wifi_config;
     strncpy((char*)wifi_config.sta.ssid, 
         cfg_.ssid.c_str(),
         cfg_.ssid.length());

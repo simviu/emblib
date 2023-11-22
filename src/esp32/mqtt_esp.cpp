@@ -177,9 +177,10 @@ void mqtt_prepare(void)
     esp_log_level_set("TRANSPORT", ESP_LOG_VERBOSE);
     esp_log_level_set("outbox", ESP_LOG_VERBOSE);
 
-    ESP_ERROR_CHECK(nvs_flash_init());
-    ESP_ERROR_CHECK(esp_netif_init());
-    ESP_ERROR_CHECK(esp_event_loop_create_default());
+    // TODO: check merge with wifi init.
+   // ESP_ERROR_CHECK(nvs_flash_init());
+  //  ESP_ERROR_CHECK(esp_netif_init());
+  //  ESP_ERROR_CHECK(esp_event_loop_create_default());
 
    
 
@@ -194,7 +195,7 @@ void MQTT::setRecvCb(FunRecvCb f)
 //----
 bool MQTT::connect()
 {
-  //  mqtt_prepare(); TODO: check wifi nvs init
+    mqtt_prepare(); 
     mqtt_app_start(cfg_);
     return true;
 }

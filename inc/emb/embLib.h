@@ -254,12 +254,29 @@ namespace emb{
     };
     //-----
     class ADC{
-    public:
+    public:        
         struct Cfg{
             int pin=0;
         }; Cfg cfg_;
         bool init();
-        int read();
+
+        // Note: need config polyCurve ad2v_ first. 
+        double volt() 
+        { data_.v = ad2v_.calc(readf());  return data_.v; }
+        int read(); // raw
+        int readf() // raw (filtered)
+        {   data_.ad = read();
+            data_.adf = filter_.inp(data_.ad);
+            return data_.adf; };
+
+        AvgFilter filter_;
+        PolyCurve ad2v_; // to voltage curve
+        //---- data save
+        struct Data{
+            double ad = 0; // raw
+            double adf = 0; // raw filtered
+            double v = 0;
+        }; Data data_;
     };
     //----
     class Wifi{
