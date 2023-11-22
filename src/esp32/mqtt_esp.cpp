@@ -194,7 +194,7 @@ void MQTT::setRecvCb(FunRecvCb f)
 //----
 bool MQTT::connect()
 {
-    mqtt_prepare();
+  //  mqtt_prepare(); TODO: check wifi nvs init
     mqtt_app_start(cfg_);
     return true;
 }
