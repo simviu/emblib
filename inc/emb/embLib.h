@@ -243,7 +243,7 @@ namespace emb{
         struct Cfg{
             int pin_SDA = 5;
             int pin_SCL = 6;
-            int pin_RST = 7;
+            int pin_RST = -1;
             void set_pins(int sda, int scl, int rst)
             { pin_SDA = sda; pin_SCL = scl; pin_RST = rst; }
         }; Cfg cfg_;
